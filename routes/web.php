@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailQueueController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/mail-queue', [MailQueueController::class, 'index'])->name('mail.queue.index');
+Route::post('/mail-queue/send', [MailQueueController::class, 'sendMail'])->name('mail.queue.send');
 
 Route::middleware([
     'auth:sanctum',
